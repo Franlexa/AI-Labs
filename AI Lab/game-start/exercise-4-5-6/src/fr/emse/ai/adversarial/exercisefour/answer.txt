@@ -1,0 +1,55 @@
+Exercise 4:
+
+- How player are represented?
+   In the Nim Game, the players are represented by the turns in the game.
+    The game is a two-player game, where each player takes turns making a move.
+    The human player is represented when the condition if (state.get(0) == 0) is true.
+    The human player is prompted to enter their move via the console input (Scanner in = new Scanner(System.in)).
+    The machine player is represented when the condition if (state.get(0) != 0) is true.
+
+- What is a state of the game?
+ In the context of game playing,
+ a "state" of the game represents a snapshot or configuration of the game at a specific point in time.
+ It captures all the relevant information needed to determine the current situation, including the positions of game pieces, scores, player turns, and any other relevant game-specific data.
+ In the Nim Game, the state is represented by a List<Integer> object.
+
+
+- How actions are represented?
+   In game playing, "actions" represent the possible moves or decisions that a player can make in a given state of the game.
+   Actions are the set of legal and valid choices available to a player during their turn.
+   The representation of actions depends on the specific game being played.
+    In The Nim Game, the actions are represented as a List<Integer>.
+    This list contains the possible moves that a player can make in the current state of the Nim game.
+     Each integer in the list corresponds to a specific action, which, in the context of Nim, typically represents removing a certain number of stones from a pile.
+
+- What is the meaning of the utility function?
+   In game playing, the utility function is a function that assigns a numerical value to a terminal state of the game.
+    The utility value represents the desirability or favorability of that particular game state for a player.
+   The utility function is used by algorithms like minimax and alpha-beta pruning to evaluate and compare different game states during the search for the best move.
+   The utility function typically returns a higher value for states that are more favorable to the player and a lower value for states that are less favorable.
+   The actual values assigned by the utility function are arbitrary and depend on the specific design of the game.
+   In the Nim game the utility values are defined within the SimpleTwoPlyGameTree class.
+
+Exercise 5:
+
+- Using these classes and the Nim example, explain how the exploration of the game tree is done for each algorithm:
+        Minimax Algorithm:
+          The minimax algorithm explores the game tree recursively, considering each possible move and evaluating the utility of terminal states. The basic idea is to maximize the minimum utility (hence the name "minimax") for the current player. Here's a step-by-step explanation:
+          The maxmin method in the MiniMaxAlgo class starts the exploration with the root node of the game tree.
+          For each node, it checks if the node is a leaf (terminal state). If yes, it returns the utility value for that state.
+          If the node is not a leaf, it retrieves the children of the node and recursively calls minmax on each child, alternating between maximizing and minimizing the utility.
+          The algorithm continues to explore until it reaches terminal states, and utility values propagate back up the tree.
+
+        Alpha-Beta Pruning Algorithm:
+        The alpha-beta pruning algorithm enhances the minimax algorithm by eliminating unnecessary branches in the game tree, significantly reducing the number of nodes to be evaluated. Here's how it works:
+         The alphaBeta method in the AlphaBetaAlgo class is called with the root node of the game tree.
+          Similar to the minimax algorithm, it recursively explores the tree but introduces alpha and beta parameters to track bounds on the possible values of the node.
+          Pruning occurs when it's determined that further exploration of a particular branch is unnecessary because it won't affect the final decision.
+          The algorithm maintains alpha (the best value found so far for the maximizing player) and beta (the best value found so far for the minimizing player) and updates them during the exploration.
+
+        Iterative Deepening Alpha-Beta Pruning Algorithm:
+        The iterative deepening alpha-beta pruning algorithm is an enhancement that performs a series of depth-limited searches with increasing depths until a time limit is reached. Here's how it works:
+        The iterativeDeepeningAlphaBetaSearch method in the IterativeDeepeningAlphaBetaSearch class is called with the root node of the game tree.
+         It iteratively performs alpha-beta pruning searches with increasing depth limits, starting from 1 and going up to the specified maximum depth.
+         At each iteration, it calls the alphaBeta method, which uses alpha-beta pruning to explore the tree up to the given depth.
+         The algorithm keeps track of the best move found so far and continues until the time limit is reached.
